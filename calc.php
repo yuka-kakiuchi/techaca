@@ -21,37 +21,32 @@
 //number1とnumber2に値がセットされる時のみ処理をする
  if(isset($_POST['no1']) && isset($_POST['no2'])&&isset($_POST['select'])) {
      $answer = "";
-        //数値かどうかの判断
-        if (is_numeric($_POST['no1']) && is_numeric($_POST['no2'])) {
-            //+の場合
-                if ($_POST['select'] == 'plus') {
-                     $answer = $_POST['no1'] + $_POST['no2'];
-                }
-             //-の場合
-                else if ($_POST['select'] == 'minus') {
-                          $answer = $_POST['no1'] - $_POST['no2'];
-                 }
-            //×の場合
-                else if ($_POST['select'] == 'multiply') {
-                          $answer = $_POST['no1'] * $_POST['no2'];
-                 }
-            //÷の場合
-                 else if ($_POST['select'] == 'division') {
-                     //0で割る場合
-                      if ($_POST['no2'] == 0) {
-                         print "0で割れません";
-                      } else {
+     //数値かどうかの判断
+     if (is_numeric($_POST['no1']) && is_numeric($_POST['no2'])) {
+         //+の場合
+         if ($_POST['select'] == 'plus') {
+             $answer = $_POST['no1'] + $_POST['no2'];
+         } //-の場合
+         else if ($_POST['select'] == 'minus') {
+             $answer = $_POST['no1'] - $_POST['no2'];
+         } //×の場合
+         else if ($_POST['select'] == 'multiply') {
+             $answer = $_POST['no1'] * $_POST['no2'];
+         } //÷の場合
+         else if ($_POST['select'] == 'division') {
+             //0で割る場合
+             if ($_POST['no2'] == 0) {
+                 print "0で割れません";
+             } else {
                  $answer = $_POST['no1'] / $_POST['no2'];
-                      }
-                 } else {
-                     print "数字を入れてください";
-                 }
+             }
+         }
          echo "$answer";
      } else {
-         print "計算できません";
+         print "数字を入れてください";
      }
  }
-     ?>
+      ?>
    <!--答えの部分終わり-->
 
     <br/>
