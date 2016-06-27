@@ -12,6 +12,4 @@
                die("接続エラー：{$e->getMessage()}");
             }
         return $db;
-     }
-
-?>
+}
