@@ -7,44 +7,24 @@
 　<h1>掲示板</h1>
 
 
+  <form  method="POST">
+    本文<br>
+    <textarea name="contents"></textarea><br>
+    <input type="submit" action="form.php" value="投稿">
+  </form>
 
-{*ログイン状態確認*}
-{if isset($session_name)}
-    {*ログイン時のみ、投稿フォームを表示*}
-     本文<br>
-     <form method="POST" action="form.php">
-     <textarea name="contents"></textarea><br>
-     </form>
-{*ログインしていない場合*}
-{else}
-    {*ログイン・登録画面へ移動*}
-    <form action="login.php">
-    <input type="submit" value="ログイン・登録ページ"><br>
-    </form>
-{/if}
+  <HR>
+　<from>
+   {foreach $data as $d}
+       <br>ユーザー：{$d.user_id}
+       <br>コメント：{$d.contents}<br><br>
+   {/foreach}
+  </from>
 
 
-
-{*ログイン時のみ掲示板の内容を表示*}
-{if isset($session_id)}
-     {*DBに記載されたデータを表示*}
-    {foreach $post_data as $post_datas}
-        名前：{$post_datas.name}
-        本文：{$post_datas. contents}
-        <form action=edit.php method="GET">
-          <input type=hidden name=id value=$id>
-          <input type=submit value=編集>
-        </form>
-        <form action=sakujo.php method="get">
-          <input type=hidden name=id value=$>
-          <input type=submit value=投稿削除>
-        </form>
-
-    {/foreach}
-
-    <a href="logout.php"  name="logout">ログアウトする</a><br>
-{/if}
+  <form method="POST">
+      <a href = "edit.php" method="get" name="edit">投稿編集画面へ</a>
+      <a href="logout.php"  name="logout">ログアウトする</a><br>
+  </form>
 </body>
 </html>
-
-

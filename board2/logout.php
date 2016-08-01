@@ -1,11 +1,18 @@
 <?php
- session_start();
+require_once('MySmarty.class.php');
+require_once  'db.php';
+$smarty = new MySmarty();
 
-//ログアウトボタンが押された時の処理
-if($_POST["logout"]=="logout"){
-    session_destroy();      // セッションクリア
-    $_SESSION = array();   // セッション変数のクリア
-}print "ログアウトしました。";
+    session_start();
 
-$smarty->display( 'logout.tpl' );
- ?>
+    // セッション変数のクリア
+    $_SESSION = array();
+
+    // セッションクリア
+    session_destroy();
+
+$smarty->display('smar_logout.tpl');
+
+print "ログアウトしました。";
+
+

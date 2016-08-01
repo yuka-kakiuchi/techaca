@@ -1,3 +1,26 @@
+<?php
+/* Smarty version 3.1.29, created on 2016-07-31 04:01:31
+  from "C:\xampp\htdocs\techaca\tech_aca\board2\templates\smar_newmem.tpl" */
+
+if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
+  'has_nocache_code' => false,
+  'version' => '3.1.29',
+  'unifunc' => 'content_579d5bfb423620_24129522',
+  'file_dependency' => 
+  array (
+    'b85655ef38ab2263b7330cb3795db1e4d4c30bec' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\techaca\\tech_aca\\board2\\templates\\smar_newmem.tpl',
+      1 => 1469930487,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_579d5bfb423620_24129522 ($_smarty_tpl) {
+?>
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -29,4 +52,5 @@
  </div>
 </form>
 </body>
-</html>
+</html><?php }
+}
