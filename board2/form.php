@@ -11,6 +11,7 @@ $smarty=new MySmarty();
            //データをを変数に格納
            //$user_id = $_SESSION['login_name'];
            $user_id = $_SESSION['login_id'];
+           $user_name = $_SESSION['login_name'];
 
            //データ入力があった際、DBに記録する処理
             if(isset($_POST['contents'])) {

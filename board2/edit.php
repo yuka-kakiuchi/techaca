@@ -10,21 +10,26 @@ $smarty=new MySmarty();
     try{
         $db = getDb();
 
-        //結合したテーブルからデータを取得し、投稿順に並べ替える
-        $stt = $db -> prepare('SELECT contents From post ORDER BY id ');
-        $stt -> execute();
-        $data = $stt->fetch(PDO::FETCH_ASSOC);
+        //edit.phpからのPOSTデータを変数に格納
+        $id = $_POST['id'];
+        $user_id = $_POST['user_id'];
+
+        if($user_id == $_SESSION['login_id']) {
+            //結合したテーブルからデータを取得し、投稿順に並べ替える
+            $stt = $db->prepare('SELECT * From post ORDER BY id = :id');
+            $stt->execute();
+            $data = $stt->fetch(PDO::FETCH_ASSOC);
             //繰り返し出力処理
             $data = array();
             while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
                 $data[] = $row;
-             }
+            }
 
             //Smartyにcontentsという名前で配列を渡す
             $smarty->assign('datas', $data);
             $db = NULL;
-        
-        
+
+        }
 
     }catch(PDOException $e){
         $db=NULL;

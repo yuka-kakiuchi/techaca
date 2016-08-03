@@ -10,10 +10,24 @@
         　　<TBODY>
         　　 {foreach $datas as $user_datas}
                 <TR>
-                    {*本文/編集/削除*}
+                    {*投稿文*}
                     <TD align="center">{$user_datas.contents}</TD>
-                    <TD align="center"><input type=submit name=update method="GET" value = {$user_datas.contents} action = "update.php">更新</TD>
-                    <TD align="center"><input type=submit name=delete method="GET" value = {$user_datas.contents} action = "delete.php">削除</TD>
+                    {*編集ボタン*}
+                    <TD align="center">
+                        <form method="POST" action="update.php">
+                           <input type="hidden" name="id" value="{$user_datas.id}">
+                           <input type="hidden" name="user_id" value="{$user_datas.user_id}">
+                           <input type="submit" value ="編集" >
+                         </form>
+                    </TD>
+                    {*削除ボタン*}
+                    <TD align="center">
+                        <form method="POST" action="delete.php">
+                           <input type="hidden" name="id" value="{$user_datas.id}">
+                           <input type="hidden" name="user_id" value="{$user_datas.user_id}">
+                           <input type=submit name=delete  value = "削除">
+                         </form>
+                    </TD>
                 </TR>
              {/foreach}
             </TBODY>

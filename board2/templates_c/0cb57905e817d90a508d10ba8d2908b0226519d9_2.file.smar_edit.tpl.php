@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-07-31 01:18:28
+/* Smarty version 3.1.29, created on 2016-08-03 09:26:29
   from "C:\xampp\htdocs\techaca\tech_aca\board2\templates\smar_edit.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_579d35c423bcd8_25835452',
+  'unifunc' => 'content_57a19ca5d957e7_47539396',
   'file_dependency' => 
   array (
     '0cb57905e817d90a508d10ba8d2908b0226519d9' => 
     array (
       0 => 'C:\\xampp\\htdocs\\techaca\\tech_aca\\board2\\templates\\smar_edit.tpl',
-      1 => 1469918543,
+      1 => 1470209181,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_579d35c423bcd8_25835452 ($_smarty_tpl) {
+function content_57a19ca5d957e7_47539396 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -47,10 +47,26 @@ $__foreach_user_datas_0_saved_local_item = $_smarty_tpl->tpl_vars['user_datas'];
                     
                     <TD align="center"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['contents'], ENT_QUOTES, 'UTF-8');?>
 </TD>
-                    <TD align="center"><input type=submit name=update method="GET" value = <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['contents'], ENT_QUOTES, 'UTF-8');?>
- action = "update.php">更新</TD>
-                    <TD align="center"><input type=submit name=delete method="GET" value = <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['contents'], ENT_QUOTES, 'UTF-8');?>
- action = "delete.php">削除</TD>
+                    
+                    <TD align="center">
+                        <form method="POST" action="update.php">
+                           <input type="hidden" name="id" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['id'], ENT_QUOTES, 'UTF-8');?>
+">
+                           <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['user_id'], ENT_QUOTES, 'UTF-8');?>
+">
+                           <input type="submit" value ="編集" >
+                         </form>
+                    </TD>
+                    
+                    <TD align="center">
+                        <form method="POST" action="delete.php">
+                           <input type="hidden" name="id" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['id'], ENT_QUOTES, 'UTF-8');?>
+">
+                           <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['user_datas']->value['user_id'], ENT_QUOTES, 'UTF-8');?>
+">
+                           <input type=submit name=delete  value = "削除">
+                         </form>
+                    </TD>
                 </TR>
              <?php
 $_smarty_tpl->tpl_vars['user_datas'] = $__foreach_user_datas_0_saved_local_item;

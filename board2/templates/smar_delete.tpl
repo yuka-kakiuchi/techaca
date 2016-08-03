@@ -5,7 +5,13 @@
 </head>
 <body>
 
-  <form action="form.php"></form>
-  <input type="submit" value="戻る">
+    <div align="center">
+        <form action="form.php">
+            <input type="submit" value="掲示板へ">
+        </form>
+
+    </div>
+
+
 </body>
 </html>
