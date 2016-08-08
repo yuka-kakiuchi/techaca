@@ -9,10 +9,8 @@ $smarty=new MySmarty();
        //ログイン状況の確認
        if(isset($_SESSION['login_id'])&&($_SESSION['login_password'])&&isset($_SESSION['login_name'])){
            //データをを変数に格納
-           //$user_id = $_SESSION['login_name'];
            $user_id = $_SESSION['login_id'];
            $user_name = $_SESSION['login_name'];
-
            //データ入力があった際、DBに記録する処理
             if(isset($_POST['contents'])) {
                 if ($_POST['contents']!='') {
@@ -24,12 +22,10 @@ $smarty=new MySmarty();
                 }
             }
 
-
-           //DBテーブルを結合させ、(postの主キー、idを使って)postされた順で処理
-           $stt = $db -> prepare('SELECT post.id, post.contents, post.user_id, member.id, member.name
-                                  FROM post LEFT JOIN member ON post.user_id = member.id　
-                                  ORDER BY post.id');
-
+           $stt = $db->prepare('SELECT post.id,post.user_id,post.contents,member.name 
+                                From post LEFT JOIN member ON post.user_id = member.id ORDER BY post.id');
+           $stt->execute();
+           
            //smartyで表示させるための処理
            $data = array();
            while ($row = $stt -> fetch(PDO::FETCH_ASSOC)) {
@@ -37,6 +33,7 @@ $smarty=new MySmarty();
            }
            //Smartyに配列を渡す
            $smarty -> assign('data',$data);
+           $smarty -> assign('user_id',$user_id);
 
        //ログインできていなかった時の処理
        }else {

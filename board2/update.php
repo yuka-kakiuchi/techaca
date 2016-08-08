@@ -7,23 +7,28 @@ $smarty=new MySmarty();
   try{
       $db = getDb();
 
-      if(isset($_POST['contents'])) {
-
-          //変更内容の格納
-          $contents = $_POST["contents"];
+          //POSTで惣村されたデータの格納
           $id = $_POST['id'];
           $user_id = $_POST['user_id'];
 
-          if ($_POST['contents'] != '') {
-              //データの更新
-              $stt = $db->prepare("UPDATE post SET contents = :contents WHERE id = :id ");
-              $stt->bindParam(':contents', $contents);
-              $stt->bindParam('id', $id);
-              $stt->execute();
-              //編集完了の表記
-              print "編集しました。";
-              $db = NULL;
-          }
+          if(isset($id)&&isset($user_id)) {
+              //ログイン状況の確認
+              if ($user_id == $_SESSION['login_id']) {
+              //更新される文が入力されている場合の処理
+                  if (isset($_POST['contents'])) {
+                      if ($_POST['contents'] != '') {
+                          $contents = $_POST['contents'];
+                          //データの更新
+                          $stt = $db->prepare("UPDATE post SET contents = :contents WHERE id = :id ");
+                          $stt->bindParam(':contents', $contents);
+                          $stt->bindParam('id', $id);
+                          $stt->execute();
+                          //編集完了の表記
+                          print "編集しました。";
+                          $db = NULL;
+                      }
+                  }
+              }
       }
   }catch(PDOException $e){
       $db=NULL;

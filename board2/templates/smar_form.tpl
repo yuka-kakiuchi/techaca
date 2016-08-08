@@ -9,29 +9,36 @@
 
   <form  method="POST">
     本文<br>
-      <textarea name="contents" cols="30" rows="4"></textarea><br>
-    <input type="submit" action="form.php" value="投稿">
+       <textarea name="contents" cols="30" rows="4"></textarea><br>
+       <input type="submit" action="form.php" value="投稿"><br>
   </form>
 
   <HR>
+
 　<form>
-    {foreach $data as $datas}
-           <br>ユーザー：{$datas.name}
-           <br>コメント：{$datas.contents}
+      {if isset($user_id)}
+      {foreach $data as $datas}
+         <br>ユーザー：{$datas.name}
+         <br>コメント：{$datas.contents|escape}
+         <br>
+          {*ログイン者の投稿のみ出現させる*}
+          {if $datas.user_id == $user_id}
+              <form method = "post" action = "edit.php" >
+                  <input type = "hidden" name = "user_id" value = {$datas.user_id}>
+                  <input type = "hidden" name = "id" value = {$datas.id}>
+                  <input type = "submit" value="編集">
+              </form>
+              <form method = "post" action="delete.php">
+                  <input type = "hidden" name = "user_id" value = {$datas.user_id}>
+                  <input type = "hidden" name = "id" value = {$datas.id}>
+                  <input type = "submit" value = "削除">
+              </form>
+          {/if}
 
-           {*自分が投稿した内容のみ編集できる処理*}
-            {if $datas.user_id = $session_id}
-              　<br>
-                <form method = "POST" action = "edit.php">
-                <a href="edit.php"  name="edit">編集</a><br>
-                <input type="hidden" name = "user_id" value = "{$datas.user_id}">
-                <input type="hidden" name = "id" value = "{$datas.id}">
-            {/if}
-
-           <br><br>
-    {/foreach}
+      {/foreach}
+      {/if}
   </form>
-      <a href="edit.php"  name="edit">編集</a><br>
+
       <a href="logout.php"  name="logout">ログアウトする</a><br>
   </form>
 </body>

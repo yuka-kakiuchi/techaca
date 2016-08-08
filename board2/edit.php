@@ -2,35 +2,27 @@
 session_start();
 require_once('MySmarty.class.php');
 require_once 'db.php';
-
 $smarty=new MySmarty();
 
 
     //DBに接続
     try{
+       //データを変数に格納 
+       $id = $_POST['id'];
+       $user_id = $_POST['user_id'];
+
         $db = getDb();
 
-        //edit.phpからのPOSTデータを変数に格納
-        $id = $_POST['id'];
-        $user_id = $_POST['user_id'];
-
-        if($user_id == $_SESSION['login_id']) {
-            //結合したテーブルからデータを取得し、投稿順に並べ替える
-            $stt = $db->prepare('SELECT * From post ORDER BY id = :id');
-            $stt->execute();
-            $data = $stt->fetch(PDO::FETCH_ASSOC);
-            //繰り返し出力処理
-            $data = array();
-            while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
-                $data[] = $row;
-            }
-
-            //Smartyにcontentsという名前で配列を渡す
-            $smarty->assign('datas', $data);
-            $db = NULL;
-
-        }
-
+        //DBから本文を取得
+        $stt = $db->prepare("SELECT contents FROM post WHERE id = '$id' ");
+        $stt->execute();
+        $row = $stt->fetch(PDO::FETCH_ASSOC);
+        //smartyに抽出したものを渡す
+        $smarty->assign('id',$id);
+        $smarty->assign('user_id',$user_id);
+        $smarty->assign('contents',$row['contents']);
+        $db = NULL;
+        
     }catch(PDOException $e){
         $db=NULL;
         die("エラーメッセジ:{$e->getMessage()}");

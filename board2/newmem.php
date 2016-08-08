@@ -21,6 +21,7 @@ $smarty= new MySmarty();
              if (strlen($_POST['login_password']) >= 6) {
                  //ユーザーIDが重複していないかどうかの確認
                  if ($stt = $db->prepare('SELECT DISTINCT membert FROM id;')) {
+
                      $stt ->execute();
 
                      //会員情報をDBに登録
@@ -41,6 +42,7 @@ $smarty= new MySmarty();
                  // ユーザIDが重複している場合の処理
                  } else {
                      print 'このユーザーは既に登録されています。';
+                     $stt ->execute();
                  }
              //パスワードが６文字以下の場合
              } else {
